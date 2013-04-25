@@ -16,8 +16,11 @@ public class App
         System.out.println( "Hello World!" );
         
         SudokuReader reader = new QuickReader();
-        Solver solver = new Solver(reader.getData());
         
+        Solver solver = new Solver(reader.getData());
+        Utility.printMatrix(solver.getData());
         Utility.printEmptyCells(solver.getEmptyCells());
+        
+        solver.doSolve();
     }
 }

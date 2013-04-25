@@ -10,41 +10,51 @@ package com.my.sudoku.solver;
  */
 public class EmptyCell {
     
-    private int rowId;
-    private int columnId;
-    private int currentValue = 0;
+    private int row;
+    private int column;
+    private int value = 0;
     
     public EmptyCell(){
         
     }
 
-    public EmptyCell(int rowId, int columnId) {
-        this.rowId = rowId;
-        this.columnId = columnId;
+    public EmptyCell(int row, int column) {
+        this.row = row;
+        this.column = column;
     }
 
-    public int getRowId() {
-        return rowId;
+    public int getRow() {
+        return row;
     }
 
-    public void setRowId(int rowId) {
-        this.rowId = rowId;
+    public void setRow(int row) {
+        this.row = row;
     }
 
-    public int getColumnId() {
-        return columnId;
+    public int getColumn() {
+        return column;
     }
 
-    public void setColumnId(int columnId) {
-        this.columnId = columnId;
+    public void setColumn(int column) {
+        this.column = column;
     }
 
-    public int getCurrentValue() {
-        return currentValue;
+    public int getValue() {
+        return value;
     }
 
-    public void setCurrentValue(int currentValue) {
-        this.currentValue = currentValue;
+    public void setValue(int value) {
+        this.value = value;
+    }
+    
+    public int incrementValue(){
+        this.value ++;
+        return this.value;
+    }
+    
+    public int zeroValue(){
+        this.value = 0;
+        return this.value;
     }
     
     @Override
@@ -52,9 +62,9 @@ public class EmptyCell {
         
         String s = "";
         
-        s += "[" + this.rowId +"]";
-        s += "[" + this.columnId + "]=";
-        s += this.currentValue;
+        s += "[" + this.row +"]";
+        s += "[" + this.column + "]=";
+        s += this.value;
         
         return s;
     }

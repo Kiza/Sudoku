@@ -28,6 +28,16 @@ public class Utility {
         
     }
     
+    public static void printMatrix(int[][] data){
+        for(int i = 0; i < data.length; i ++){
+            for (int j = 0; j < data[0].length; j ++){
+                System.out.print("[\t" + data[i][j] + "\t]");
+            }
+            
+            System.out.println();
+        }
+    }
+    
     public static List<EmptyCell> extractEmptyCells(int[][] data){
         
         List<EmptyCell> emptyCells = new ArrayList<EmptyCell>();
@@ -41,5 +51,13 @@ public class Utility {
         }
         
         return emptyCells;
+    }
+    
+    public static void setDataCellZero(int[][] data, EmptyCell emptyCell){
+        data[emptyCell.getRow()][emptyCell.getColumn()] = 0;
+    }
+    
+    public static void setDataCellValue(int[][]data, EmptyCell emptyCell){
+        data[emptyCell.getRow()][emptyCell.getColumn()] = emptyCell.getValue();
     }
 }

@@ -12,6 +12,11 @@ public class QuickReader implements SudokuReader {
 
     @Override
     public int[][] getData() {
-        return new int[][]{{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}};
+        return new int[][]{
+            {0, 0, 0, 3}, 
+            {0, 4, 2, 0}, 
+            {0, 2, 3, 0}, 
+            {4, 0, 0, 0}
+        };
     }
 }

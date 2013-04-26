@@ -4,6 +4,7 @@
  */
 package com.my.sudoku.solver;
 
+import com.my.sudoku.solver.interf.Validator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,11 +17,20 @@ public class Solver {
     private Validator validator = new SimpleValidator();
     private int[][] data;
     private List<EmptyCell> emptyCells = new ArrayList<EmptyCell>();
-
-    public Solver(int[][] data) {
+    private List<int[][]> results = new ArrayList<int[][]>();
+    
+    public Solver(Validator validator, int[][] data) {
         this.data = data;
 
         emptyCells = Utility.extractEmptyCells(data);
+    }
+
+    public Validator getValidator() {
+        return validator;
+    }
+
+    public void setValidator(Validator validator) {
+        this.validator = validator;
     }
 
     public int[][] getData() {
@@ -39,16 +49,18 @@ public class Solver {
         this.emptyCells = emptyCells;
     }
 
-    public void doSolve() {
+    public List<int[][]> doSolve() {
         /*
          *  value range:
          *      [1, data.length]
          */
 
+        boolean found = true;
         int maxValue = data.length;
         for (int i = 0; i < emptyCells.size(); i++) {
             if (i < 0) {
                 System.out.println("No results found!");
+                found = false;
                 break;
             }
 
@@ -60,28 +72,32 @@ public class Solver {
             do {
                 currentCell.incrementValue();
                 
-                if(currentCell.getRow()==3 && currentCell.getColumn()==0){
-                    System.out.println("");
-                }
-                
             } while (currentCell.getValue() <= maxValue && !validator.isValid(data, currentCell));
 
             if (currentCell.getValue() > maxValue) {
                 currentCell.zeroValue();
                 i = i - 2;
                 
-                System.out.println();
-                System.out.println("Backtracking: ");
-                Utility.printMatrix(data);
+                Utility.printMatrix("\nBacktrack: ", data);
+                
             } else {
+                
                 Utility.setDataCellValue(data, currentCell);
 
-                System.out.println();
-                System.out.println("Update: ");
-                Utility.printMatrix(data);
+                Utility.printMatrix("\nUpdate: ", data);
             }
         }
         
-        Utility.printMatrix(data);
+        if(found){
+            int[][] result = new int[data.length][data[0].length];
+            for(int i = 0; i < data.length; i ++){
+                System.arraycopy(data[i], 0, result[i], 0, data[0].length);
+            }
+            
+            results.add(result);
+            Utility.printMatrix("\nResults found!", data);
+        }
+
+        return results;
     }
 }

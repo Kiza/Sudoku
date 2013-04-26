@@ -28,6 +28,11 @@ public class Utility {
         
     }
     
+    public static void printMatrix(String title, int[][] data){
+        System.out.println(title);
+        printMatrix(data);
+    }
+    
     public static void printMatrix(int[][] data){
         for(int i = 0; i < data.length; i ++){
             for (int j = 0; j < data[0].length; j ++){

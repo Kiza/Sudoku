@@ -4,6 +4,8 @@
  */
 package com.my.sudoku.solver;
 
+import com.my.sudoku.solver.interf.Validator;
+
 /**
  *
  * @author kiza
